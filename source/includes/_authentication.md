@@ -11,7 +11,7 @@ curl "https://crossborder.omniship.eu/api/v1/<resource>"
 
 > Make sure to replace `FkihCtzyXWvutSRUaaEupN8hvABcDefgHI6lJKvv` with your API key.
 
-OMNISHIP uses API keys to allow access to the API. Contact your OMNISHIP representative to receive a new OMNISHIP API key.
+V-factory uses API keys to allow access to the API. You can create an API key within the <a href="https://app.v-factory.eu/user/api-tokens" target="_blank">V-factory application</a>.
 
 In order to authenticate properly, please put <code>Authorization: Bearer &lt;API Access Token&gt;</code> in the request header. OMNISHIP expects for the API key to be included in all API requests to the server in a header that looks like the following:
 

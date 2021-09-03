@@ -2,19 +2,19 @@
 title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
+  - shell 
+
+toc_footers:
+  - <a target='_blank' href='https://v-factory.omniship.eu/user/api-tokens'>Sign in for a Developer Key</a>
 
 includes:
   - introduction
   - authentication
-  - customers
-  - customers.list
-  - customers.create
-  - customers.get
-  - customers.update
-  - waybills
-  - waybills.create
-  - waybills.get
+  - orders
+  - orders.create
+  - orders.update
+  - orders.get
+  - orders.list
   - errors
 
 search: true
