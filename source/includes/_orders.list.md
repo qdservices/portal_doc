@@ -124,9 +124,9 @@ This endpoint retrieves all Sales Orders.
 
 Query params | Type | Description
 --------- | ------- | -----------
-sales_order_number | <span class="type">string</span> | Sales Order Number provided when creating the shipment. If multiple, separate with a comma.
-created_at_from | <span class="type">date</span> | Search for shipments created since this date
-created_at_till | <span class="type">date</span> | Search for shipments created since this date
+sales_order_number | <span class="type">string</span> | Sales Order Number provided when creating the order. If multiple, separate with a comma.
+created_at_from | <span class="type">date</span> | Search for orders created since this date
+created_at_till | <span class="type">date</span> | Search for orders created since this date
 state | <span class="type">string</span> | Search by current status of the Order. valid options\: <code>new</code>, <code>created</code>, <code>processing</code>, <code>shipped</code> <code>pending</code>, <code>action</code>, <code>out_of_stock</code>, <code>error</code>
 page | <span class="type">integer</span> | Which page number want to fetch, default: <code>1</code>
-per_page | <span class="type">integer</span> | Number of Shipments per page to fetch, default: <code>25</code>, max: <code>100</code>
+per_page | <span class="type">integer</span> | Number of Orders per page to fetch, default: <code>25</code>, max: <code>100</code>

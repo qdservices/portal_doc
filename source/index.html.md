@@ -15,6 +15,10 @@ includes:
   - orders.update
   - orders.get
   - orders.list
+  - products
+  - products.create
+  - products.update
+  - products.list
   - errors
 
 search: true
