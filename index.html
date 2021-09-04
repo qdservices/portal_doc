@@ -329,6 +329,23 @@
               </ul>
           </li>
           <li>
+            <a href="#products" class="toc-h1 toc-link" data-title="Products">Products</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-a-product" class="toc-h2 toc-link" data-title="Create a Product">Create a Product</a>
+                  </li>
+                  <li>
+                    <a href="#update-a-product" class="toc-h2 toc-link" data-title="Update a Product">Update a Product</a>
+                  </li>
+                  <li>
+                    <a href="#inactivate-a-product" class="toc-h2 toc-link" data-title="Inactivate a Product">Inactivate a Product</a>
+                  </li>
+                  <li>
+                    <a href="#list-all-products" class="toc-h2 toc-link" data-title="List all Products">List all Products</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
@@ -997,17 +1014,17 @@ Content-Type:application/json;charset=UTF-8
 <tr>
 <td>sales_order_number</td>
 <td><span class="type">string</span></td>
-<td>Sales Order Number provided when creating the shipment. If multiple, separate with a comma.</td>
+<td>Sales Order Number provided when creating the order. If multiple, separate with a comma.</td>
 </tr>
 <tr>
 <td>created_at_from</td>
 <td><span class="type">date</span></td>
-<td>Search for shipments created since this date</td>
+<td>Search for orders created since this date</td>
 </tr>
 <tr>
 <td>created_at_till</td>
 <td><span class="type">date</span></td>
-<td>Search for shipments created since this date</td>
+<td>Search for orders created since this date</td>
 </tr>
 <tr>
 <td>state</td>
@@ -1022,7 +1039,359 @@ Content-Type:application/json;charset=UTF-8
 <tr>
 <td>per_page</td>
 <td><span class="type">integer</span></td>
-<td>Number of Shipments per page to fetch, default: <code>25</code>, max: <code>100</code></td>
+<td>Number of Orders per page to fetch, default: <code>25</code>, max: <code>100</code></td>
+</tr>
+</tbody></table>
+<h1 id='products'>Products</h1>
+<p>The Product resource is used to create, list, update and delete Products.</p>
+<h2 id='create-a-product'>Create a Product</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://v-factory.omniship.eu/api/portal/v1/products"</span>
+  <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer FkihCtzyXWvutSRUaaEupN8hvABcDefgHI6lJKvv"</span>
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+  <span class="nt">-d</span> <span class="s1">'{
+          "sku": "SKU991",
+          "name": "Shoes",
+          "barcode": "153485909567",
+          "description": "description",
+          "weight": 250,
+          "length": 10,
+          "width": 5,
+          "height": 2,
+          "sales_rate": 19.81,
+          "hs_code": "9876878",
+          "country_of_origin": "NL",
+          "unlimited_stock": false,
+          "minimum_stock_level": 20,
+      }'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>HTTP/1.1 201 Created
+Content-Type:application/json;charset=UTF-8
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a59bd158-2efb-11eb-b2c7-095feaa89723"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shoes"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SKU991"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"description"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"barcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"153485909567"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mi">250</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"length"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sales_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">19.81</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"hs_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9876878"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"country_of_origin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NL"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stock"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"warehouse"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Warehouse"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"total_stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"reserved"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"backorders"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"picklists"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"locations"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request'>HTTP Request</h3>
+<p><span class="http-verb post">POST</span> <code>https://v-factory.omniship.eu/api/portal/v1/products</code></p>
+<h3 id='arguments'>Arguments</h3>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td><span class="type">string</span></td>
+<td><span class="required">Required</span> Name of the product.</td>
+</tr>
+<tr>
+<td>sku</td>
+<td><span class="type">string</span></td>
+<td><span class="required">Required</span> The Stock Keeping Unit (SKU) of an product. This is unique for every product in the inventory.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><span class="type">string</span></td>
+<td><span class="optional">optional</span> Description of the product.</td>
+</tr>
+<tr>
+<td>barcode</td>
+<td><span class="type">string</span></td>
+<td><span class="optional">optional</span> Barcode (usually GS1, EAN13 or UPC code).</td>
+</tr>
+<tr>
+<td>sales_rate</td>
+<td><span class="type">double</span></td>
+<td><span class="required">required</span> Sales price of the product.</td>
+</tr>
+<tr>
+<td>weight</td>
+<td><span class="type">integer</span></td>
+<td><span class="optional">optional</span> Weight of the product in grams.</td>
+</tr>
+<tr>
+<td>length</td>
+<td><span class="type">integer</span></td>
+<td><span class="optional">optional</span> Length of the product in centimeters.</td>
+</tr>
+<tr>
+<td>width</td>
+<td><span class="type">integer</span></td>
+<td><span class="optional">optional</span> Width of the product in centimeters.</td>
+</tr>
+<tr>
+<td>height</td>
+<td><span class="type">integer</span></td>
+<td><span class="optional">optional</span> Height of the product in centimeters.</td>
+</tr>
+<tr>
+<td>hs_code</td>
+<td><span class="type">string</span></td>
+<td><span class="optional">optional</span> HS Code for customs.</td>
+</tr>
+<tr>
+<td>country_of_origin</td>
+<td><span class="type">string</span></td>
+<td><span class="optional">optional</span> Country of origin of the product for customs (needs to be ISO 3166 2-char code).</td>
+</tr>
+</tbody></table>
+<h2 id='update-a-product'>Update a Product</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://v-factory.omniship.eu/api/portal/v1/products/SKU991"</span>
+  <span class="nt">-X</span> PATCH
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer FkihCtzyXWvutSRUaaEupN8hvABcDefgHI6lJKvv"</span>
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+  <span class="nt">-d</span> <span class="s1">'{
+        "name": "Updated name",
+        "sku": "UpdatedSKU",
+        "description": "Updated description",
+        "barcode": "Updated barcode",
+        "weight": 12,
+        "length": 10,
+        "width": 2,
+        "height": 3,
+        "sales_rate": "30.20",
+        "hs_code": "1231232",
+        "country_of_origin": "SR"
+      }'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+Content-Type:application/json;charset=UTF-8
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a59bd158-2efb-11eb-b2c7-095feaa89723"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Updated name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UpdatedSKU"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Updated description"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"barcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Updated barcode"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"length"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sales_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">30.2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"hs_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1231232"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"country_of_origin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SR"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stock"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"warehouse"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Warehouse"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"total_stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"reserved"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"backorders"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"picklists"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"locations"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint updates a Product in V-Factory Portal.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><span class="http-verb patch">PATCH</span> <code>https://v-factory.omniship.eu/api/portal/v1/products/&lt;SKU&gt;</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>SKU</td>
+<td>The SKU of the <span class="object">Product</span> to update</td>
+</tr>
+</tbody></table>
+<h3 id='arguments'>Arguments</h3>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td><span class="type">string</span></td>
+<td>Name of the product.</td>
+</tr>
+<tr>
+<td>sku</td>
+<td><span class="type">string</span></td>
+<td>The Stock Keeping Unit (SKU) of an product. This is unique for every product in the inventory.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><span class="type">string</span></td>
+<td>Description of the product.</td>
+</tr>
+<tr>
+<td>barcode</td>
+<td><span class="type">string</span></td>
+<td>Barcode (usually GS1, EAN13 or UPC code).</td>
+</tr>
+<tr>
+<td>weight</td>
+<td><span class="type">integer</span></td>
+<td>Weight of the product in grams.</td>
+</tr>
+<tr>
+<td>length</td>
+<td><span class="type">integer</span></td>
+<td>Length of the product.</td>
+</tr>
+<tr>
+<td>width</td>
+<td><span class="type">integer</span></td>
+<td>Width of the product.</td>
+</tr>
+<tr>
+<td>height</td>
+<td><span class="type">integer</span></td>
+<td>Height of the product.</td>
+</tr>
+<tr>
+<td>sales_rate</td>
+<td><span class="type">double</span></td>
+<td>Sales price of the product.</td>
+</tr>
+<tr>
+<td>hs_code</td>
+<td><span class="type">string</span></td>
+<td>HS Code for customs.</td>
+</tr>
+<tr>
+<td>country_of_origin</td>
+<td><span class="type">string</span></td>
+<td>Country of origin of the product for customs (needs to be ISO 3166 2-char code).</td>
+</tr>
+</tbody></table>
+<h2 id='inactivate-a-product'>Inactivate a Product</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://v-factory.omniship.eu/api/portal/v1/products/SKU991/inactivate"</span>
+  <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer FkihCtzyXWvutSRUaaEupN8hvABcDefgHI6lJKvv"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>HTTP/1.1 204 No Content
+Content-Type:application/json;charset=UTF-8
+</code></pre></div>
+<p>This endpoint inactivates a Product. To be able to inactivate an Product the Product cannot have stock, be open
+on a picklist or have backorders, otherwise you will get an error.</p>
+
+<p>A Product can also be re-activated with <span class="http-verb post">POST</span> <code>https://v-factory.omniship.eu/api/portal/v1/products/&lt;ID&gt;/activate</code></p>
+<h3 id='http-requests'>HTTP Requests</h3>
+<p><span class="http-verb post">POST</span> <code>https://v-factory.omniship.eu/api/portal/v1/products/&lt;ID&gt;/inactivate</code></p>
+
+<p><span class="http-verb post">POST</span> <code>https://v-factory.omniship.eu/api/portal/v1/products/&lt;ID&gt;/activate</code></p>
+<h2 id='list-all-products'>List all Products</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://v-factory.omniship.eu/api/portal/v1/products"</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer FkihCtzyXWvutSRUaaEupN8hvABcDefgHI6lJKvv"</span>
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>HTTP/1.1 200 OK
+Content-Type:application/json;charset=UTF-8
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a59bd158-2efb-11eb-b2c7-095feaa89723"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shoes"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SKU991"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"description"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"barcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"153485909567"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mi">250</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"length"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sales_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">19.81</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"hs_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9876878"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"country_of_origin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NL"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stock"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"warehouse"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Warehouse"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"total_stock"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"reserved"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"backorders"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"picklists"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"locations"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="s2">"..."</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="s2">"..."</span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves all Products.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><span class="http-verb get">GET</span> <code>https://v-factory.omniship.eu/api/portal/v1/products</code></p>
+
+<table><thead>
+<tr>
+<th>Query params</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>SKU</td>
+<td><span class="type">string</span></td>
+<td>SKU provided when creating the product. If multiple, separate with a comma.</td>
+</tr>
+<tr>
+<td>created_at_from</td>
+<td><span class="type">date</span></td>
+<td>Search for products created since this date</td>
+</tr>
+<tr>
+<td>created_at_till</td>
+<td><span class="type">date</span></td>
+<td>Search for products created since this date</td>
+</tr>
+<tr>
+<td>inactive</td>
+<td><span class="type">boolean</span></td>
+<td>Get the products that are inactive. Valid values are <code>true</code>, <code>false</code>. By default, only products with active state are returned. Set parameter to <code>false</code> to retrieve all products.</td>
+</tr>
+<tr>
+<td>page</td>
+<td><span class="type">integer</span></td>
+<td>Which page number want to fetch, default: <code>1</code></td>
+</tr>
+<tr>
+<td>per_page</td>
+<td><span class="type">integer</span></td>
+<td>Number of Products per page to fetch, default: <code>25</code>, max: <code>100</code></td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
